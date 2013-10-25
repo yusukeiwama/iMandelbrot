@@ -30,14 +30,14 @@
 	
 	UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
 	[backButton addTarget:fractalView action:@selector(drawMandelbrotSet) forControlEvents:UIControlEventTouchUpInside];
-	backButton.frame = CGRectMake(20, [[UIScreen mainScreen] bounds].size.height - 108, [[UIScreen mainScreen] bounds].size.width - 40, 88);
+	backButton.frame = CGRectMake(20, [[UIScreen mainScreen] bounds].size.height - 68, [[UIScreen mainScreen] bounds].size.width - 40, 44);
 	[backButton setTitle:@"Back" forState:UIControlStateNormal];
 	[self.view addSubview:backButton];
 	
-	magnificationLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, [[UIScreen mainScreen] bounds].size.width - 40, 88)];
+	magnificationLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, [[UIScreen mainScreen] bounds].size.width - 40, 44)];
 	magnificationLabel.textAlignment = NSTextAlignmentRight;
 	magnificationLabel.adjustsFontSizeToFitWidth = YES;
-	magnificationLabel.font = [UIFont fontWithName:@"Helvetica" size:88];
+	magnificationLabel.font = [UIFont fontWithName:@"Helvetica" size:44];
 	[self updateMagnificationLabel];
 	[self.view addSubview:magnificationLabel];
 }

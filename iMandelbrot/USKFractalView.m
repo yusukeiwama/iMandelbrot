@@ -131,12 +131,10 @@
 								   currentCRect.origin.y + currentCRect.size.height * relativeP.y);
 	CGSize newSize = CGSizeMake(currentCRect.size.width / magnification, currentCRect.size.height / magnification);
 	
-	[UIView animateWithDuration:0.5 animations:^{
-		[self drawMandelbrotSetInComplexRect:CGRectMake(complexP.x - newSize.width / 2.0,
-														complexP.y - newSize.height / 2.0,
-														newSize.width,
-														newSize.height)];
-	}];
+	[self drawMandelbrotSetInComplexRect:CGRectMake(complexP.x - newSize.width / 2.0,
+													complexP.y - newSize.height / 2.0,
+													newSize.width,
+													newSize.height)];
 	currentMagnification *= magnification;
 	[delegate updateMagnificationLabel];
 }
