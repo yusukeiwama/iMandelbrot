@@ -7,9 +7,11 @@
 //
 
 #import "USKViewController.h"
-#import "USKFractalView.h"
 
-@interface USKViewController ()
+@interface USKViewController () {
+	USKFractalView *fractalView;
+	UILabel *magnificationLabel;
+}
 
 @end
 
@@ -20,22 +22,35 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
-	USKFractalView *iv = [[USKFractalView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width)];
-	iv.center = self.view.center;
-	[self.view addSubview:iv];
+	fractalView = [[USKFractalView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width)];
+	fractalView.delegate = self;
+	fractalView.center = self.view.center;
+	[self.view addSubview:fractalView];
 	self.view.backgroundColor = [UIColor whiteColor];
 	
 	UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-	[backButton addTarget:iv action:@selector(drawMandelbrotSet) forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:fractalView action:@selector(drawMandelbrotSet) forControlEvents:UIControlEventTouchUpInside];
 	backButton.frame = CGRectMake(20, [[UIScreen mainScreen] bounds].size.height - 108, [[UIScreen mainScreen] bounds].size.width - 40, 88);
 	[backButton setTitle:@"Back" forState:UIControlStateNormal];
 	[self.view addSubview:backButton];
+	
+	magnificationLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, [[UIScreen mainScreen] bounds].size.width - 40, 88)];
+	magnificationLabel.textAlignment = NSTextAlignmentRight;
+	magnificationLabel.adjustsFontSizeToFitWidth = YES;
+	magnificationLabel.font = [UIFont fontWithName:@"Helvetica" size:88];
+	[self updateMagnificationLabel];
+	[self.view addSubview:magnificationLabel];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateMagnificationLabel
+{
+	magnificationLabel.text = [NSString stringWithFormat:@"x%.1f", fractalView.currentMagnification];
 }
 
 @end

@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol USKFractalViewDelegate <NSObject>
+
+- (void)updateMagnificationLabel;
+
+@end
+
 @interface USKFractalView : UIImageView
+
+@property id delegate;
+@property (readonly) double currentMagnification;
 
 - (void)drawMandelbrotSet;
 - (void)drawMandelbrotSetInComplexRect:(CGRect)cRect;

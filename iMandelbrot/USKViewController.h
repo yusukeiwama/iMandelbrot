@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "USKFractalView.h"
 
-@interface USKViewController : UIViewController
+@interface USKViewController : UIViewController <USKFractalViewDelegate>
 
 @end

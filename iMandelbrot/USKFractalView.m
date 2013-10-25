@@ -14,6 +14,9 @@
 	CGRect currentCRect;
 }
 
+@synthesize delegate;
+@synthesize currentMagnification;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,6 +24,21 @@
         // Initialization code
 		self.contentMode = UIViewContentModeScaleAspectFit;
 		self.userInteractionEnabled = YES;
+
+		width = frame.size.width;
+		height = frame.size.height;
+		
+//		if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+//			([UIScreen mainScreen].scale == 2.0)) {
+//			// Retina display
+//			width = frame.size.width * 2.0;
+//			height = frame.size.height * 2.0;
+//		} else {
+//			// non-Retina display
+//			width = frame.size.width;
+//			height = frame.size.height;
+//		}
+		
 		[self drawMandelbrotSet];
     }
     return self;
@@ -29,6 +47,8 @@
 - (void)drawMandelbrotSet
 {
 	CGRect complexRect = CGRectMake(-2.0, -2.0, 4.0, 4.0);
+	currentMagnification = 1.0;
+	[delegate updateMagnificationLabel];
 	[self drawMandelbrotSetInComplexRect:complexRect];
 }
 
@@ -40,9 +60,6 @@
 	NSUInteger maxIteration = 100;
 	NSUInteger iteration;
 	double _Complex z0 = 0 + 0 * I;
-	
-	width = 1536;
-	height = width;
 	
 	size_t bytePerPixel = sizeof(unsigned char) * 3;
 	size_t bitsPerPixel, bytesPerRow;
@@ -113,10 +130,15 @@
 	CGPoint complexP = CGPointMake(currentCRect.origin.x + currentCRect.size.width * relativeP.x,
 								   currentCRect.origin.y + currentCRect.size.height * relativeP.y);
 	CGSize newSize = CGSizeMake(currentCRect.size.width / magnification, currentCRect.size.height / magnification);
-	[self drawMandelbrotSetInComplexRect:CGRectMake(complexP.x - newSize.width / 2.0,
-													complexP.y - newSize.height / 2.0,
-													newSize.width,
-													newSize.height)];
+	
+	[UIView animateWithDuration:0.5 animations:^{
+		[self drawMandelbrotSetInComplexRect:CGRectMake(complexP.x - newSize.width / 2.0,
+														complexP.y - newSize.height / 2.0,
+														newSize.width,
+														newSize.height)];
+	}];
+	currentMagnification *= magnification;
+	[delegate updateMagnificationLabel];
 }
 
 
