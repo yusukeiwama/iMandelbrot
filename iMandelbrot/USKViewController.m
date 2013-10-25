@@ -24,6 +24,12 @@
 	iv.center = self.view.center;
 	[self.view addSubview:iv];
 	self.view.backgroundColor = [UIColor whiteColor];
+	
+	UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	[backButton addTarget:iv action:@selector(drawMandelbrotSet) forControlEvents:UIControlEventTouchUpInside];
+	backButton.frame = CGRectMake(20, [[UIScreen mainScreen] bounds].size.height - 108, [[UIScreen mainScreen] bounds].size.width - 40, 88);
+	[backButton setTitle:@"Back" forState:UIControlStateNormal];
+	[self.view addSubview:backButton];
 }
 
 - (void)didReceiveMemoryWarning

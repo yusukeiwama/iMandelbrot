@@ -10,6 +10,7 @@
 
 @interface USKFractalView : UIImageView
 
+- (void)drawMandelbrotSet;
 - (void)drawMandelbrotSetInComplexRect:(CGRect)cRect;
 
 @end

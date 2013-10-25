@@ -11,6 +11,7 @@
 
 @implementation USKFractalView {
 	size_t width, height;
+	CGRect currentCRect;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -20,13 +21,21 @@
         // Initialization code
 		self.contentMode = UIViewContentModeScaleAspectFit;
 		self.userInteractionEnabled = YES;
-		[self drawMandelbrotSetInComplexRect:CGRectMake(-2.0, -2.0, 4.0, 4.0)];
+		[self drawMandelbrotSet];
     }
     return self;
 }
 
+- (void)drawMandelbrotSet
+{
+	CGRect complexRect = CGRectMake(-2.0, -2.0, 4.0, 4.0);
+	[self drawMandelbrotSetInComplexRect:complexRect];
+}
+
 - (void)drawMandelbrotSetInComplexRect:(CGRect)cRect
 {
+	currentCRect = cRect;
+	
 	// Draw Mandelbrot Set
 	NSUInteger maxIteration = 100;
 	NSUInteger iteration;
@@ -41,7 +50,7 @@
 	
 	for (NSUInteger i = 0; i < height; i++) {
 		for (NSUInteger j = 0; j < width; j++) {
-			double _Complex c = cRect.size.width * j / width + cRect.origin.x + (cRect.size.height * i / height + cRect.origin.y) * I;
+			double _Complex c = currentCRect.size.width * j / width + currentCRect.origin.x + (currentCRect.size.height * i / height + currentCRect.origin.y) * I;
 			double _Complex z = z0;
 			for (iteration = 0; iteration < maxIteration; iteration++) {
 				z = z * z + c;
@@ -99,9 +108,18 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	CGPoint p = [[touches anyObject] locationInView:self];
-	printf("p = (%f, %f)\tc = (%f, %f)\n", p.x, p.y, p.x / width - 0.5, p.y / height - 0.5);
-	[self drawMandelbrotSetInComplexRect:CGRectMake(p.x / width - 0.5, p.y / height - 0.5, 1.0, 1.0)];
+	CGPoint relativeP = CGPointMake(p.x / self.frame.size.width, p.y / self.frame.size.height);
+	double magnification = 3.0;
+	CGPoint complexP = CGPointMake(currentCRect.origin.x + currentCRect.size.width * relativeP.x,
+								   currentCRect.origin.y + currentCRect.size.height * relativeP.y);
+	CGSize newSize = CGSizeMake(currentCRect.size.width / magnification, currentCRect.size.height / magnification);
+	[self drawMandelbrotSetInComplexRect:CGRectMake(complexP.x - newSize.width / 2.0,
+													complexP.y - newSize.height / 2.0,
+													newSize.width,
+													newSize.height)];
 }
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
