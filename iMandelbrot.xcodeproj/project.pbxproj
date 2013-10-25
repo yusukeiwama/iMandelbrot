@@ -22,6 +22,7 @@
 		43CDE23B1819EDD300208C17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CDE21A1819EDD300208C17 /* UIKit.framework */; };
 		43CDE2431819EDD400208C17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43CDE2411819EDD400208C17 /* InfoPlist.strings */; };
 		43CDE2451819EDD400208C17 /* iMandelbrotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CDE2441819EDD400208C17 /* iMandelbrotTests.m */; };
+		43CDE2501819EE6900208C17 /* USKFractalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CDE24F1819EE6900208C17 /* USKFractalView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		43CDE2401819EDD300208C17 /* iMandelbrotTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iMandelbrotTests-Info.plist"; sourceTree = "<group>"; };
 		43CDE2421819EDD400208C17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43CDE2441819EDD400208C17 /* iMandelbrotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iMandelbrotTests.m; sourceTree = "<group>"; };
+		43CDE24E1819EE6900208C17 /* USKFractalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USKFractalView.h; sourceTree = "<group>"; };
+		43CDE24F1819EE6900208C17 /* USKFractalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USKFractalView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				43CDE22B1819EDD300208C17 /* Main_iPad.storyboard */,
 				43CDE22E1819EDD300208C17 /* USKViewController.h */,
 				43CDE22F1819EDD300208C17 /* USKViewController.m */,
+				43CDE24E1819EE6900208C17 /* USKFractalView.h */,
+				43CDE24F1819EE6900208C17 /* USKFractalView.m */,
 				43CDE2311819EDD300208C17 /* Images.xcassets */,
 				43CDE21D1819EDD300208C17 /* Supporting Files */,
 			);
@@ -256,6 +261,7 @@
 			files = (
 				43CDE2301819EDD300208C17 /* USKViewController.m in Sources */,
 				43CDE2271819EDD300208C17 /* USKAppDelegate.m in Sources */,
+				43CDE2501819EE6900208C17 /* USKFractalView.m in Sources */,
 				43CDE2231819EDD300208C17 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +399,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iMandelbrot/iMandelbrot-Prefix.pch";
 				INFOPLIST_FILE = "iMandelbrot/iMandelbrot-Info.plist";
@@ -475,6 +482,7 @@
 				43CDE24A1819EDD400208C17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43CDE24B1819EDD400208C17 /* Build configuration list for PBXNativeTarget "iMandelbrotTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +491,7 @@
 				43CDE24D1819EDD400208C17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

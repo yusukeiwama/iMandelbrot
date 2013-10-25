@@ -7,6 +7,7 @@
 //
 
 #import "USKViewController.h"
+#import "USKFractalView.h"
 
 @interface USKViewController ()
 
@@ -18,6 +19,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	
+	USKFractalView *iv = [[USKFractalView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width)];
+	iv.center = self.view.center;
+	[self.view addSubview:iv];
+	self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
