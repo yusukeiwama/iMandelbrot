@@ -76,9 +76,36 @@
 				}
 			}
 			if (cabs(z) > 1) {
-				imageData[(i * height + j) * bytePerPixel + 0] = 255 * (1 - iteration / (double)maxIteration);
-				imageData[(i * height + j) * bytePerPixel + 1] = 255 * (1 - iteration / (double)maxIteration);
-				imageData[(i * height + j) * bytePerPixel + 2] = 255 * (1 - iteration / (double)maxIteration);
+				unsigned char R, G, B;
+				
+				// RGB
+				//				double darkness = 1 - (double)iteration / maxIteration;
+				//				R = 255 * darkness, G = 255 * darkness, B = 255 * darkness;
+				
+				
+				// HSV -> RGB
+				//				double H = iteration / (maxIteration + 1.0) * 100.0 + 200; // 0 <= hue < 360
+				double H = iteration / (maxIteration + 1.0) * 360; // 0 <= hue < 360
+				int Hi = floor(H / 60.0);
+				double f = H / 60.0 - Hi;
+				double S = 1.0;
+				double V = (double)iteration / maxIteration; // Value (a.k.a Brightness, Lightness)
+				double p = V * (1 - S);
+				double q = V * (1 - f * S);
+				double t = V * (1 - (1 - f * S));
+				switch (Hi) {
+					case 0: R = V * 255, G = t * 255, B = p * 255; break;
+					case 1: R = q * 255, G = V * 255, B = p * 255; break;
+					case 2: R = p * 255, G = V * 255, B = t * 255; break;
+					case 3: R = p * 255, G = q * 255, B = V * 255; break;
+					case 4: R = t * 255, G = p * 255, B = V * 255; break;
+					case 5: R = V * 255, G = p * 255, B = q * 255; break;
+					default:R = 0, G = 0, B = 0; break;
+				}
+				
+				imageData[(i * height + j) * bytePerPixel + 0] = R;
+				imageData[(i * height + j) * bytePerPixel + 1] = G;
+				imageData[(i * height + j) * bytePerPixel + 2] = B;
 			}
 		}
 	}
